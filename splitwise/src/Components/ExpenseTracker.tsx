@@ -1,38 +1,23 @@
 import { FormEvent, useEffect, useState } from "react";
-import IDataList from "../model/IDataList";
 import { setDataFromServer } from '../services/menu';
-
-type Props = {
-    onTrue: any,
-    onClose: any
-}
-
-type State = {
-    payeeName: string,
-    product: string,
-    price: number,
-    setDate: string
-}
 
 function ExpenseTracker() {
     const [errorMsg, setErrorMsg] = useState<null | Error>(null);
-    const [loading, setLoading] = useState<boolean>(false);
+    const [isValid, setIsValid] = useState<boolean>(false);
+
     const [payeeName, setPayeeName] = useState<string>("");
     const [product, setProduct] = useState<string>("");
     const [price, setPrice] = useState<number>(0);
     const [setDate, setSetDate] = useState<string>("");
-    const [isValid, setIsValid] = useState<boolean>(false);
     useEffect(() => {
         const helper = async () => {
             try {
-                setLoading(true);
+                setSetDate(selectDefaultDate());
             } catch (error) {
                 setErrorMsg(error as Error);
-                setLoading(true);
             }
         };
         helper();
-        // setSetDate(selectDefaultDate());
     }, []);
     const selectDefaultDate = () => {
         const today = new Date();
