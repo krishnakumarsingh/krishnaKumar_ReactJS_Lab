@@ -1,10 +1,12 @@
-import React from 'react';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
-import ShowList from "./Components/ShowList";
-import ExpenseTracker from "./Components/ExpenseTracker";
 import './App.css';
+import ExpenseTracker from "./Components/ExpenseTracker";
+import ShowList from "./Components/ShowList";
+import SignIn from './Components/SignIn';
+import SignUp from './Components/SignUp';
 
 function App() {
+  let token = localStorage.getItem("token_react_lab");
   return (
     <div className="App">
       <nav className="navbar navbar-expand-lg bg-light">
@@ -26,10 +28,12 @@ function App() {
         </div>
       </nav>
       <Router>
-          <Routes>
-              <Route path="/" element={<ShowList />} />
-              <Route path="/ExpenseTracker" element={<ExpenseTracker />} />
-          </Routes>
+        <Routes>
+          <Route path="/" element={token ? <ShowList /> : <SignIn />} />
+          <Route path="/sign-in" element={token ? <ShowList /> : <SignIn />} />
+          <Route path="/sign-up" element={token ? <ShowList /> : <SignUp />} />
+          <Route path="/ExpenseTracker" element={token ? <ExpenseTracker /> : <SignIn />} />
+        </Routes>
       </Router>
     </div>
   );

@@ -140,5 +140,21 @@
       "setDate": "2023-02-25",
       "id": 20
     }
+  ],
+  "users": [
+    {
+      "name": "krishna",
+      "email": "krish805@gmail.com",
+      "password": "admin",
+      "phone": "9975301469",
+      "id": 1
+    },
+    {
+      "name": "KK",
+      "email": "krish802@gmail.com",
+      "password": "admin",
+      "phone": "998456861234",
+      "id": 2
+    }
   ]
 }

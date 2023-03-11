@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
-import IDataList from '../model/IDataList';
-import { getDataFromServer } from '../services/menu'
+import { IDataList } from '../model/IDataList';
+import { getDataFromServer } from '../services/menu';
 
 function ShowList() {
     const [list, setList] = useState<IDataList[]>([]);
@@ -33,7 +33,7 @@ function ShowList() {
         setTotalRamesh(totalBaidByRamesh);
         setName(totalBaidByRahul > totalBaidByRamesh ? "Rahul" : "Ramesh");
     }, [list]);
-    const totalValue = (prev:number, cur:number) => prev + cur;
+    const totalValue = (prev: number, cur: number) => prev + cur;
     if (!list) return null;
     if (errorMsg) return <h2>Please check, getting issue during fetching data!!</h2>
     return (
@@ -106,7 +106,3 @@ function ShowList() {
 }
 
 export default ShowList;
-
-{/*
-
-*/}

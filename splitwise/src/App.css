@@ -17,12 +17,6 @@ p, h1{
   padding: 10px;
   margin: 0%;
 }
-section{
-  position: absolute;
-  top: 5%;
-  left: 25%;
-  width: 50%;
-}
 article{
   min-width: 300px;
   margin-top: 10px;
