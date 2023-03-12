@@ -8,15 +8,15 @@ import SignUp from './Components/SignUp';
 
 function App() {
   let token = localStorage.getItem("token_react_lab");
-  const [isValid, setIsValid] = useState("");
+  const [isValid, setIsValid] = useState(false);
   const logout = () => {
     localStorage.removeItem("token_react_lab");
   }
   useEffect(() => {
     if(token) {
-      setIsValid("Helloe");
+      setIsValid(true);
     }
-  }, [localStorage.getItem("token_react_lab")]);
+  }, [token]);
   return (
     <div className="App">
       <nav className="navbar navbar-expand-lg bg-light">
