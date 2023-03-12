@@ -143,18 +143,11 @@
   ],
   "users": [
     {
-      "name": "krishna",
-      "email": "krish805@gmail.com",
+      "name": "admin",
+      "email": "admin@gmail.com",
       "password": "admin",
-      "phone": "9975301469",
+      "phone": "1234567890",
       "id": 1
-    },
-    {
-      "name": "KK",
-      "email": "krish802@gmail.com",
-      "password": "admin",
-      "phone": "998456861234",
-      "id": 2
     }
   ]
 }

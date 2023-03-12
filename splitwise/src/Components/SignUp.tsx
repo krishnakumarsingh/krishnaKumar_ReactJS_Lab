@@ -1,8 +1,9 @@
 import { FormEvent, useState } from 'react';
-import { setSignupFromServer } from '../services/menu';
+import { getSignupFromServer, setSignupFromServer } from '../services/menu';
 
 const SignUp = () => {
-    const [errorMsg, setErrorMsg] = useState<null | Error>(null);
+    const [errorMsg, setErrorMsg] = useState<null | Error | boolean>(null);
+    const [errorUserExitMsg, setErrorUserExitMsg] = useState<null | Error | boolean>(null);
     const [isValid, setIsValid] = useState<boolean>(false);
 
     const [name, setName] = useState<string>("");
@@ -18,23 +19,32 @@ const SignUp = () => {
             email !== "" && typeof email === "string" &&
             password !== "" && typeof password === "string" &&
             confirmPassword === password && typeof confirmPassword === "string" &&
-            phone !== "" && typeof phone === "string") {
+            phone !== "" && typeof phone === "string" && phone.length === 10) {
             try {
                 const finalData = {
                     name, email, password, phone
                 }
-                let data = await setSignupFromServer(finalData);
-                console.log(data);
-                setIsValid(true);
+                let userExit = await getSignupFromServer(finalData);
+                if(!userExit) { 
+                    let data = await setSignupFromServer(finalData);
+                    console.log(data, userExit);
+                    setIsValid(true);
+                    localStorage.setItem("token_react_lab", "xxxx-xxxx-xxxx");
+                    window.location.href = "/"
+                } else {
+                    setErrorUserExitMsg(true);
+                }
             } catch (error) {
                 setErrorMsg(error as Error);
                 setIsValid(false);
             }
+        } else {
+            setErrorMsg(true);
         }
-
+        window.scrollTo(0, -10000);
     };
     return (
-        <section className="vh-100 gradient-custom">
+        <section className="">
             <div className="container py-5 h-100">
                 <div className="row d-flex justify-content-center align-items-center h-100">
                     <div className="col-12 col-md-8 col-lg-6 col-xl-5">
@@ -44,7 +54,8 @@ const SignUp = () => {
                                     <form onSubmit={submitData}>
                                         <h2 className="fw-bold mb-2 text-uppercase">Sign Up</h2>
                                         <p className="text-white-50 mb-1">Please enter your details!</p>
-                                        {isValid && <p className='text-danger'>Successfully created your account.</p>}
+                                        {errorUserExitMsg && <p className='text-warning'>Already user exists.</p>}
+                                        {isValid && <p className='text-success'>Successfully created your account.</p>}
                                         {errorMsg && <p className='text-danger'>Getting error during creating your account.</p>}
                                         <div className="form-outline form-white mb-1">
                                             <label className="form-label" htmlFor="typeEmailX">Email *</label>
@@ -66,7 +77,7 @@ const SignUp = () => {
                                             <label className="form-label" htmlFor="typePhoneX">Phone *</label>
                                             <input type="tel" id="typePhoneX" className="form-control form-control-lg" onChange={(e) => setPhone(e.target.value)} />
                                         </div>
-                                        <button className="btn btn-outline-light btn-lg px-5" type="submit">Login</button>
+                                        <button className="btn btn-outline-light btn-lg px-5" type="submit">Sign Up</button>
                                     </form>
                                 </div>
 
