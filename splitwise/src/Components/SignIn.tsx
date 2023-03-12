@@ -4,6 +4,7 @@ import { getSignupFromServer } from '../services/menu';
 const SignIn = () => {
     const [errorMsg, setErrorMsg] = useState<null | Error>(null);
     const [isValid, setIsValid] = useState<boolean>(false);
+    const [errorUserExitMsg, setErrorUserExitMsg] = useState<null | string>(null);
 
     const [email, setEmail] = useState<string>("");
     const [password, setPassword] = useState<string>("");
@@ -23,6 +24,9 @@ const SignIn = () => {
                     setIsValid(true);
                     localStorage.setItem("token_react_lab", "xxxx-xxxx-xxxx");
                     window.location.href = "/"
+                } else {
+                    setIsValid(false);
+                    setErrorUserExitMsg("Wrong user.");
                 }
             } catch (error) {
                 setErrorMsg(error as Error);
@@ -41,10 +45,11 @@ const SignIn = () => {
                             <div className="card-body p-5 text-center">
                                 <form onSubmit={submitData}>
                                     <div className="mb-md-5 pb-2">
-                                        {isValid && <p className='text-danger'>Successfully logged in your account.</p>}
-                                        {errorMsg && <p className='text-danger'>Getting error during login your account.</p>}
                                         <h2 className="fw-bold mb-2 text-uppercase">Login</h2>
                                         <p className="text-white-50 mb-5">Please enter your login and password!</p>
+                                        {isValid && <p className='text-danger'>Successfully logged in your account.</p>}
+                                        {errorMsg && <p className='text-danger'>Getting error during login your account.</p>}
+                                        {errorUserExitMsg && <p className='text-danger'>{errorUserExitMsg}</p>}
                                         <div className="form-outline form-white mb-4">
                                             <label className="form-label" htmlFor="typeEmailX">Email</label>
                                             <input type="email" id="typeEmailX" className="form-control form-control-lg" onChange={(e) => setEmail(e.target.value)} />

@@ -18,7 +18,7 @@ function App() {
     }
   }, [token]);
   return (
-    <div className="App">
+    <div className={`App ${isValid ? 'no-bg' : ''}`}>
       <nav className="navbar navbar-expand-lg bg-light">
         <div className="container">
           <a className="navbar-brand" href="/">Expense Tracker</a>

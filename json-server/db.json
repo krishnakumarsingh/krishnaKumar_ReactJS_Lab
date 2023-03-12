@@ -148,6 +148,13 @@
       "password": "admin",
       "phone": "1234567890",
       "id": 1
+    },
+    {
+      "name": "admin",
+      "email": "admin@admin.com",
+      "password": "admin",
+      "phone": "1234567809",
+      "id": 2
     }
   ]
 }
