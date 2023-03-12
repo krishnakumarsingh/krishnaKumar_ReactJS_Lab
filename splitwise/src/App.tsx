@@ -1,3 +1,4 @@
+import { useEffect, useState } from 'react';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import './App.css';
 import ExpenseTracker from "./Components/ExpenseTracker";
@@ -7,6 +8,15 @@ import SignUp from './Components/SignUp';
 
 function App() {
   let token = localStorage.getItem("token_react_lab");
+  const [isValid, setIsValid] = useState("");
+  const logout = () => {
+    localStorage.removeItem("token_react_lab");
+  }
+  useEffect(() => {
+    if(token) {
+      setIsValid("Helloe");
+    }
+  }, [localStorage.getItem("token_react_lab")]);
   return (
     <div className="App">
       <nav className="navbar navbar-expand-lg bg-light">
@@ -22,7 +32,8 @@ function App() {
               </li>
             </ul>
             <div className="d-flex" role="search">
-              <button className="btn btn-outline-success" type="submit"><a href="/ExpenseTracker">Add</a></button>
+              <button className="btn btn-outline-success" type="submit"><a href="/ExpenseTracker">Add</a></button>&nbsp;
+              {" "}{isValid && <button className="btn btn-outline-success" id="logout" type="button" onClick={() => logout()}><a href="/">Logout</a></button>}
             </div>
           </div>
         </div>
